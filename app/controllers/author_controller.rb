@@ -9,12 +9,12 @@ class AuthorController < ApplicationController
 
   def create
     author = author_service.add_author(author_dto: params)
-    json_render(data: author)
+    json_render(data: author, status: :created)
   end
 
   def destroy
     author_service.destroy_author(author_id: params[:id])
-    json_render
+    json_render(status: :no_content)
   end
 
   def get

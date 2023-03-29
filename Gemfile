@@ -73,3 +73,12 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# Swagger Documentation and UI
+gem 'rswag-api'
+gem 'rswag-ui'
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'rswag-specs'
+end
