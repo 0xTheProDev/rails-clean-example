@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class AuthorService < ApplicationService
-  class AuthorNotFound < StandardError; end
-
   def add_author(author_dto:)
     author = Author.new
     author.first_name = authorDto.first_name
@@ -21,7 +19,10 @@ class AuthorService < ApplicationService
   end
 
   def destroy_author(author_id:)
-    Author.find_by_id(author_id).destroy
+    author = Author.find_by_id(author_id)
+    raise AuthorNotFound if author.nil?
+
+    author.destroy
   end
 
   def find_all_authors
@@ -29,7 +30,9 @@ class AuthorService < ApplicationService
   end
 
   def find_author_by_id(author_id:)
-    Author.find_by_id(author_id)
+    author = Author.find_by_id(author_id)
+    raise AuthorNotFound if author.nil?
+    author
   end
 
   def find_authors_by_first_name(first_name:)

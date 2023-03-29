@@ -19,8 +19,6 @@ class AuthorController < ApplicationController
 
   def get
     author = author_service.find_author_by_id(author_id: params[:id])
-
-    return invalid_author_id_error if author.nil?
     json_render(data: author)
   end
 
