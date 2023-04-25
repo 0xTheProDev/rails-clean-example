@@ -1,10 +1,10 @@
 # rails-clean-example
 
 [![Ruby](https://img.shields.io/badge/ruby-%23CC342D.svg?style=for-the-badge&logo=ruby&logoColor=white)](https://www.ruby-lang.org/)
-[![Rails](https://img.shields.io/badge/ruby%20on%20rails-%23CC0000.svg?style=for-the-badge&logo=rubyonrails&logoColor=white)](https://www.rubyonrails.org//)
+[![Rails](https://img.shields.io/badge/ruby%20on%20rails-%23CC0000.svg?style=for-the-badge&logo=rubyonrails&logoColor=white)](https://www.rubyonrails.org/)
 [![Puma](https://img.shields.io/badge/puma-%23242B2F.svg?style=for-the-badge&logo=puma&logoColor=black)](https://puma.io/)
 [![OpenAPI](https://img.shields.io/badge/openapi-6BA539?style=for-the-badge&logo=openapi-initiative&logoColor=fff)](https://www.openapis.org/)
-[![RuboCop](https://img.shields.io/badge/rubocop-%23000000.svg?style=for-the-badge&logo=rubocop&logoColor=white)](https://www.rubocop.org//)
+[![RuboCop](https://img.shields.io/badge/rubocop-%23000000.svg?style=for-the-badge&logo=rubocop&logoColor=white)](https://www.rubocop.org/)
 [![Open Issues](https://img.shields.io/github/issues-raw/0xTheProDev/rails-clean-example?style=for-the-badge)](https://github.com/0xTheProDev/rails-clean-example/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed-raw/0xTheProDev/rails-clean-example?style=for-the-badge)](https://github.com/0xTheProDev/rails-clean-example/issues?q=is%3Aissue+is%3Aclosed)
 [![Open Pulls](https://img.shields.io/github/issues-pr-raw/0xTheProDev/rails-clean-example?style=for-the-badge)](https://github.com/0xTheProDev/rails-clean-example/pulls)
