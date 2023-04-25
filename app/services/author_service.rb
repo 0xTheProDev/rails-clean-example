@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
+require_relative '../dtos/author_dtos'
+
 class AuthorService < ApplicationService
+  validates :add_author, author_dto: ::Dtos::AuthorDtos::AddAuthorDto
+  returns :find_author_by_id, :update_author, dto: ::Dtos::AuthorDtos::AuthorDto
+
   def add_author(author_dto:)
     author = Author.new
     author.first_name = author_dto.first_name
     author.last_name = author_dto.last_name
     author.save
-    author
+    author.attributes
   end
 
   def add_book(author_id:, book_dto:)
@@ -17,7 +22,7 @@ class AuthorService < ApplicationService
     book.name = book_dto.name
     book.add_author(author)
     book.save
-    book
+    book.attributes
   end
 
   def destroy_author(author_id:)
@@ -28,21 +33,21 @@ class AuthorService < ApplicationService
   end
 
   def find_all_authors
-    Author.all
+    Author.all.map(&:attributes)
   end
 
   def find_author_by_id(author_id:)
     author = Author.find_by_id(author_id)
     raise AuthorNotFound if author.nil?
-    author
+    author.attributes
   end
 
   def find_authors_by_first_name(first_name:)
-    Author.where(first_name: first_name)
+    Author.where(first_name: first_name).map(&:attributes)
   end
 
   def find_authors_by_last_name(last_name:)
-    Author.where(last_name: last_name)
+    Author.where(last_name: last_name).map(&:attributes)
   end
 
   def update_author(author_id:, author_dto:)
@@ -52,6 +57,6 @@ class AuthorService < ApplicationService
     author.first_name = author_dto.first_name || author.first_name
     author.last_name = author_dto.last_name || author.last_name
     author.save
-    author
+    author.attributes
   end
 end

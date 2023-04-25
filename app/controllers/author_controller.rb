@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../dtos/author_dtos/add_author_dto'
-
 class AuthorController < ApplicationController
   def initialize
     @author_service = AuthorService.new
@@ -15,7 +13,7 @@ class AuthorController < ApplicationController
   end
 
   def create
-    author = author_service.add_author(author_dto: ::Dtos::AuthorDtos::AddAuthorDto[params.permit(:first_name, :last_name)])
+    author = author_service.add_author(author_dto: params.permit(:first_name, :last_name))
     json_render(data: author, status: :created)
   end
 
