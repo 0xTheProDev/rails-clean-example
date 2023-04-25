@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AuthorController < ApplicationController
+  on_error :get, exception: ::ApplicationService::AuthorNotFound, handler: :invalid_author_id_error
+
   def initialize
     @author_service = AuthorService.new
 
@@ -8,7 +10,7 @@ class AuthorController < ApplicationController
   end
 
   def books
-    author = author_service.find_author_by_id(author_id: params[:id])
+    author = author_service.find_books_by_author_id(author_id: params[:id])
     json_render(data: author.books)
   end
 

@@ -50,6 +50,12 @@ class AuthorService < ApplicationService
     Author.where(last_name: last_name).map(&:attributes)
   end
 
+  def find_books_by_author_id(author_id:)
+    author = Author.find_by_id(author_id)
+    raise AuthorNotFound, author_id if author.nil?
+    author.books
+  end
+
   def update_author(author_id:, author_dto:)
     author = Author.find_by_id(author_id)
     raise AuthorNotFound if author.nil?
