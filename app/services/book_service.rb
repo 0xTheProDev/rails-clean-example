@@ -16,6 +16,7 @@ class BookService < ApplicationService
 
     book.authors << author
     book.save
+    book
   end
 
   def destry_book(book_id:)
@@ -43,8 +44,9 @@ class BookService < ApplicationService
     book = Book.find_by_id(book_id)
     raise BookNotFound if book.nil?
 
-    book.authors = book.authors.filter { |author| author.id != author_id }
+    book.authors = book.authors.filter { |author| author.id != author_id.to_i }
     book.save
+    book
   end
 
   def update_book(book_id:, book_dto:)
@@ -53,5 +55,6 @@ class BookService < ApplicationService
 
     book.name = book_dto.name
     book.save
+    book
   end
 end

@@ -41,6 +41,12 @@ This example showcases Repository Pattern in Hexagonal Architecture _(also known
 
 ## Swagger UI
 
+- Generate OpenAPI specifications from RSpec:
+
+  ```sh
+  $ RAILS_ENV=test bundle exec rails rswag
+  ```
+
 - Open Swagger UI at `localhost:3000/api-docs` after running the application.
 
 ## License

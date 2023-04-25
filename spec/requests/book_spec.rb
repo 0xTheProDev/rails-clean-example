@@ -106,4 +106,64 @@ RSpec.describe 'book', type: :request do
       end
     end
   end
+
+  path '/books/{id}/authors' do
+    parameter name: 'id', in: :path, type: :integer, description: 'Book Id'
+
+    get('get authors of a book') do
+      tags 'Book'
+
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
+
+  path '/books/{id}/authors/{author_id}' do
+    parameter name: 'id', in: :path, type: :integer, description: 'Book Id'
+    parameter name: 'author_id', in: :path, type: :integer, description: 'Author Id'
+
+    put('add author to a book') do
+      tags 'Book'
+
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+
+    delete('remove author from a book') do
+      tags 'Book'
+
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
 end

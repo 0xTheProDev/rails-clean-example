@@ -3,19 +3,21 @@
 class AuthorService < ApplicationService
   def add_author(author_dto:)
     author = Author.new
-    author.first_name = authorDto.first_name
-    author.last_name = authorDto.last_name
+    author.first_name = author_dto.first_name
+    author.last_name = author_dto.last_name
     author.save
+    author
   end
 
   def add_book(author_id:, book_dto:)
-    author = Author.find_by_id(authorId)
+    author = Author.find_by_id(author_id)
     raise AuthorNotFound if author.nil?
 
     book = Book.new
     book.name = book_dto.name
     book.add_author(author)
     book.save
+    book
   end
 
   def destroy_author(author_id:)
@@ -44,11 +46,12 @@ class AuthorService < ApplicationService
   end
 
   def update_author(author_id:, author_dto:)
-    author = Author.find_by_id(authorId)
+    author = Author.find_by_id(author_id)
     raise AuthorNotFound if author.nil?
 
     author.first_name = author_dto.first_name || author.first_name
     author.last_name = author_dto.last_name || author.last_name
     author.save
+    author
   end
 end

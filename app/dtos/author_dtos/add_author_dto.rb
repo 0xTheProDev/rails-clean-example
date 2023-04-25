@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'types'
+
 module Dtos
   module AuthorDtos
     class AddAuthorDto < Dry::Struct

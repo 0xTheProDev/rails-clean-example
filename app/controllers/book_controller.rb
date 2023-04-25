@@ -7,6 +7,16 @@ class BookController < ApplicationController
     super
   end
 
+  def add_author
+    book = book_service.add_author_by_id(book_id: params[:id], author_id: params[:author_id])
+    json_render(data: book.authors)
+  end
+
+  def authors
+    book = book_service.find_book_by_id(book_id: params[:id])
+    json_render(data: book.authors)
+  end
+
   def create
     book = book_service.add_book(book_dto: params)
     json_render(data: book)
@@ -14,7 +24,7 @@ class BookController < ApplicationController
 
   def destroy
     book_service.destroy_book(book_id: params[:id])
-    json_render
+    json_render(status: :no_content)
   end
 
   def get
@@ -25,6 +35,11 @@ class BookController < ApplicationController
   def index
     books = book_service.find_all_books
     json_render(data: books)
+  end
+
+  def remove_author
+    book = book_service.remove_author_by_id(book_id: params[:id], author_id: params[:author_id])
+    json_render(data: book.authors)
   end
 
   def update

@@ -108,4 +108,25 @@ RSpec.describe 'author', type: :request do
       end
     end
   end
+
+  path '/authors/{id}/books' do
+    parameter name: 'id', in: :path, type: :integer, description: 'Author Id'
+
+    get('get books by author') do
+      tags 'Author'
+
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
 end
