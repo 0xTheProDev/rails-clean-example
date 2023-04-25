@@ -1,14 +1,13 @@
+# frozen_string_literal: true
+
 require 'swagger_helper'
 
 RSpec.describe 'book', type: :request do
-
   path '/books' do
-
     get('list books') do
       tags 'Book'
 
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -26,13 +25,12 @@ RSpec.describe 'book', type: :request do
       parameter name: :book, in: :body, schema: {
         type: :object,
         properties: {
-          name: { type: :string },
+          name: { type: :string }
         },
-        required: [ 'name' ]
+        required: ['name']
       }
 
       response(201, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -70,9 +68,9 @@ RSpec.describe 'book', type: :request do
       parameter name: :book, in: :body, schema: {
         type: :object,
         properties: {
-          name: { type: :string },
+          name: { type: :string }
         },
-        required: [ 'name' ]
+        required: ['name']
       }
 
       response(200, 'successful') do

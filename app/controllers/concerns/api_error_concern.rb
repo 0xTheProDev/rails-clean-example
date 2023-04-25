@@ -5,12 +5,10 @@ module ApiErrorConcern
     to_prepend = Module.new do
       method_names.each do |method_name|
         define_method method_name do |*args, **kwargs, &block|
-          begin
-            super(*args, **kwargs, &block)
-          rescue exception => e
-            Rails.logger.debug(e.inspect)
-            self.send(handler, *args, **kwargs, &block)
-          end
+          super(*args, **kwargs, &block)
+        rescue exception => e
+          Rails.logger.debug(e.inspect)
+          send(handler, *args, **kwargs, &block)
         end
       end
     end

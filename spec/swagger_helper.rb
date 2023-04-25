@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require File.expand_path("../../config/environment", __FILE__)
+require File.expand_path('../config/environment', __dir__)
 
 RSpec.configure do |config|
   # Specify a root folder where Swagger JSON files are generated

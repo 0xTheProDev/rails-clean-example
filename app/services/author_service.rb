@@ -39,20 +39,22 @@ class AuthorService < ApplicationService
   def find_author_by_id(author_id:)
     author = Author.find_by_id(author_id)
     raise AuthorNotFound if author.nil?
+
     author.attributes
   end
 
   def find_authors_by_first_name(first_name:)
-    Author.where(first_name: first_name).map(&:attributes)
+    Author.where(first_name:).map(&:attributes)
   end
 
   def find_authors_by_last_name(last_name:)
-    Author.where(last_name: last_name).map(&:attributes)
+    Author.where(last_name:).map(&:attributes)
   end
 
   def find_books_by_author_id(author_id:)
     author = Author.find_by_id(author_id)
     raise AuthorNotFound, author_id if author.nil?
+
     author.books
   end
 

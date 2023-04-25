@@ -8,10 +8,11 @@ module DtoConcern
       define_method method_name do |*args, **kwargs, &block|
         kwargs_validated = kwargs.map do |kwarg, kwval|
           return [kwarg, kwval] unless dto_map.include?(kwarg)
+
           begin
             [kwarg, dto_map[kwarg][kwval]]
-          rescue => exception
-            Rails.logger.debug(exception.inspect)
+          rescue StandardError => e
+            Rails.logger.debug(e.inspect)
             raise ValidationError, "#{method_name} has been called with invalid argument #{kwarg}"
           end
         end.to_h
@@ -21,8 +22,8 @@ module DtoConcern
 
         begin
           returns[return_value]
-        rescue => exception
-          Rails.logger.debug(exception.inspect)
+        rescue StandardError => e
+          Rails.logger.debug(e.inspect)
           raise ValidationError, "#{method_name} has returned invalid value"
         end
       end
@@ -38,8 +39,8 @@ module DtoConcern
           return_value = super(*args, **kwargs, &block)
           begin
             dto[return_value]
-          rescue => exception
-            Rails.logger.debug(exception.inspect)
+          rescue StandardError => e
+            Rails.logger.debug(e.inspect)
             raise ValidationError, "#{method_name} has returned invalid value"
           end
         end

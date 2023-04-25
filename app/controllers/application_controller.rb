@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   extend ApiErrorConcern
 
   def json_render(data: nil, errors: [], status: :ok)
-    render json: { data: data, errors: errors }, status: status
+    render json: { data:, errors: }, status:
   end
 
   def method_missing

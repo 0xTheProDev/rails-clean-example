@@ -33,11 +33,12 @@ class BookService < ApplicationService
   def find_book_by_id(book_id:)
     book = Book.find_by_id(book_id)
     raise BookNotFound if book.nil?
+
     book
   end
 
   def find_by_name(name:)
-    Book.where(name: name)
+    Book.where(name:)
   end
 
   def remove_author_by_id(book_id:, author_id:)

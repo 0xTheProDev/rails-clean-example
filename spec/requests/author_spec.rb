@@ -1,14 +1,13 @@
+# frozen_string_literal: true
+
 require 'swagger_helper'
 
 RSpec.describe 'author', type: :request do
-
   path '/authors' do
-
     get('list authors') do
       tags 'Author'
 
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -29,11 +28,10 @@ RSpec.describe 'author', type: :request do
           first_name: { type: :string },
           last_name: { type: :string }
         },
-        required: [ 'first_name', 'last_name' ]
+        required: %w[first_name last_name]
       }
 
       response(201, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {

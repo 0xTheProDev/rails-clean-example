@@ -5,7 +5,7 @@ class Book < ApplicationRecord
   validates :name, presence: true
 
   def add_author(author)
-    self.authors << author
+    authors << author
     self
   end
 end
