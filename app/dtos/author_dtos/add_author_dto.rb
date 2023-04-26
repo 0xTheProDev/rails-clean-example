@@ -4,9 +4,7 @@ require 'types'
 
 module Dtos
   module AuthorDtos
-    class AddAuthorDto < Dry::Struct
-      transform_keys(&:to_sym)
-
+    class AddAuthorDto < Types::Struct
       attribute :first_name, Types::String
       attribute :last_name, Types::String
     end

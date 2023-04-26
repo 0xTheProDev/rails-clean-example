@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 class Author < ApplicationRecord
-  has_and_belongs_to_many :books
+  has_many :books, class_name: 'Book'
   validates :first_name, :last_name, presence: true
 end

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BookController < ApplicationController
+  on_error :get, exception: ::ApplicationService::BookNotFound, handler: :invalid_book_id_error
+
   def initialize
     @book_service = BookService.new
 
@@ -18,8 +20,8 @@ class BookController < ApplicationController
   end
 
   def create
-    book = book_service.add_book(book_dto: params)
-    json_render(data: book)
+    book = book_service.add_book(book_dto: params.permit(:name))
+    json_render(data: book, status: :created)
   end
 
   def destroy
@@ -43,7 +45,7 @@ class BookController < ApplicationController
   end
 
   def update
-    book = book_service.update_book(params[:id], params[:body])
+    book = book_service.update_book(book_id: params[:id], book_dto: params[:body])
     json_render(data: book)
   end
 

@@ -2,9 +2,7 @@
 
 module Dtos
   module BookDtos
-    class AddBookDto < Dry::Struct
-      transform_keys(&:to_sym)
-
+    class AddBookDto < Types::Struct
       attribute :name, Types::String
     end
   end

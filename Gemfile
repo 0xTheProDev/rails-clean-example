@@ -55,6 +55,9 @@ group :development do
 
   # Standard Linting and Formatting
   gem 'rubocop', require: false
+  gem 'rubocop-graphql', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 
   # Swagger Documentation and UI
   gem 'rswag-api'
@@ -66,4 +69,4 @@ group :development, :test do
   gem 'rswag-specs'
 end
 
-gem "graphql", "~> 2.0"
+gem 'graphql', '~> 2.0'

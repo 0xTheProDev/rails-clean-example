@@ -35,7 +35,7 @@ class AuthorController < ApplicationController
   end
 
   def update
-    author = author_service.update_author(params[:id], params[:body])
+    author = author_service.update_author(author_id: params[:id], author_dto: params.permit(:first_name, :last_name))
     json_render(data: author)
   end
 

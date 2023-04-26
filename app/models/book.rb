@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Book < ApplicationRecord
-  has_and_belongs_to_many :authors
+  has_many :authors, class_name: 'Author'
   validates :name, presence: true
 
   def add_author(author)
