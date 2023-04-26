@@ -1,0 +1,7 @@
+require:
+  - rubocop-graphql
+  - rubocop-rails
+  - rubocop-rspec
+
+Metrics/MethodLength:
+  Enabled: false
