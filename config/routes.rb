@@ -19,4 +19,6 @@ Rails.application.routes.draw do
   put '/books/:id/authors/:author_id', to: 'book#add_author'
   delete '/books/:id', to: 'book#destroy'
   delete '/books/:id/authors/:author_id', to: 'book#remove_author'
+
+  post "/graphql", to: "graphql#execute"
 end

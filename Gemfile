@@ -65,3 +65,5 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rswag-specs'
 end
+
+gem "graphql", "~> 2.0"
