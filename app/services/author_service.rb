@@ -21,18 +21,18 @@ class AuthorService < ApplicationService
 
   def add_book(author_id:, book_dto:)
     author = Author.find_by(id: author_id)
-    raise AuthorNotFound if author.nil?
+    raise AuthorNotFound, author_id if author.nil?
 
     book = Book.new
     book.name = book_dto.name
-    book.add_author(author)
+    book.authors << author
     book.save
     book.attributes
   end
 
   def destroy_author(author_id:)
     author = Author.find_by(id: author_id)
-    raise AuthorNotFound if author.nil?
+    raise AuthorNotFound, author_id if author.nil?
 
     author.destroy
   end
@@ -57,15 +57,15 @@ class AuthorService < ApplicationService
   end
 
   def find_books_by_author_id(author_id:)
-    author = Author.find_by(id: author_id)
+    author = Author.includes(:books).find_by(id: author_id)
     raise AuthorNotFound, author_id if author.nil?
 
-    author.books
+    author.books.map(&:attributes)
   end
 
   def update_author(author_id:, author_dto:)
     author = Author.find_by(id: author_id)
-    raise AuthorNotFound if author.nil?
+    raise AuthorNotFound, author_id if author.nil?
 
     author.first_name = author_dto.first_name
     author.last_name = author_dto.last_name

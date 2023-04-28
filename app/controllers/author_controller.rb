@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AuthorController < ApplicationController
-  on_error :get, exception: ::ApplicationService::AuthorNotFound, handler: :invalid_author_id_error
+  rescue_from ::ApplicationService::AuthorNotFound, with: :invalid_author_id_error
 
   def initialize
     @author_service = AuthorService.new
@@ -9,9 +9,14 @@ class AuthorController < ApplicationController
     super
   end
 
+  def add_book
+    book = author_service.add_book(author_id: params[:id], book_dto: params[:body])
+    json_render(data: book, status: :created)
+  end
+
   def books
-    author = author_service.find_books_by_author_id(author_id: params[:id])
-    json_render(data: author.books)
+    books = author_service.find_books_by_author_id(author_id: params[:id])
+    json_render(data: books)
   end
 
   def create
@@ -43,7 +48,7 @@ class AuthorController < ApplicationController
 
   attr_reader :author_service
 
-  def invalid_author_id_error
-    json_render(errors: ['Invalid Author Id given.'], status: :bad_request)
+  def invalid_author_id_error(author_id)
+    json_render(errors: ["Invalid Author Id (#{author_id}) given."], status: :bad_request)
   end
 end

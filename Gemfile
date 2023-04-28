@@ -58,14 +58,17 @@ group :development do
   gem 'rubocop-graphql', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
-
-  # Swagger Documentation and UI
-  gem 'rswag-api'
-  gem 'rswag-ui'
 end
 
 group :development, :test do
   gem 'rspec-rails'
+end
+
+
+group :development, :test do
+  # Swagger Documentation and UI
+  gem 'rswag-api'
+  gem 'rswag-ui'
   gem 'rswag-specs'
 end
 

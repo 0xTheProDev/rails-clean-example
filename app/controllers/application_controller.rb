@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  extend ApiErrorConcern
-
   def json_render(data: nil, errors: [], status: :ok)
     render json: { data:, errors: }, status:
   end
