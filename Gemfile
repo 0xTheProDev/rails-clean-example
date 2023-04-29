@@ -64,12 +64,11 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
-
 group :development, :test do
   # Swagger Documentation and UI
   gem 'rswag-api'
-  gem 'rswag-ui'
   gem 'rswag-specs'
+  gem 'rswag-ui'
 end
 
 gem 'graphql', '~> 2.0'

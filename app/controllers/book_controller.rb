@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class BookController < ApplicationController
-  rescue_from ::ApplicationService::AuthorNotFound, with: :invalid_author_id_error
-  rescue_from ::ApplicationService::BookNotFound,   with: :invalid_book_id_error
-
   def initialize
     @book_service = BookService.new
 
@@ -12,12 +9,12 @@ class BookController < ApplicationController
 
   def add_author
     book = book_service.add_author_by_id(book_id: params[:id], author_id: params[:author_id])
-    json_render(data: book['authors'])
+    json_render(data: book.authors)
   end
 
   def authors
     book = book_service.find_book_by_id(book_id: params[:id])
-    json_render(data: book['authors'])
+    json_render(data: book.authors)
   end
 
   def create
@@ -42,7 +39,7 @@ class BookController < ApplicationController
 
   def remove_author
     book = book_service.remove_author_by_id(book_id: params[:id], author_id: params[:author_id])
-    json_render(data: book['authors'])
+    json_render(data: book.authors)
   end
 
   def update
@@ -53,12 +50,4 @@ class BookController < ApplicationController
   private
 
   attr_reader :book_service
-
-  def invalid_author_id_error(author_id)
-    json_render(errors: ["Invalid Author Id (#{author_id}) given."], status: :bad_request)
-  end
-
-  def invalid_book_id_error(book_id)
-    json_render(errors: ["Invalid Book Id (#{book_id}) given."], status: :bad_request)
-  end
 end

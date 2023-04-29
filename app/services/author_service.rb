@@ -4,38 +4,36 @@ require_relative '../dtos/author_dtos'
 require_relative '../dtos/book_dtos'
 
 class AuthorService < ApplicationService
+  returns   :add_book, dto: ::Dtos::BookDtos::BookThinDto
   returns   :find_author_by_id, :update_author, dto: ::Dtos::AuthorDtos::AuthorDto
   returns   :find_all_authors, :find_authors_by_first_name, :find_authors_by_last_name,
             dto: ::Dtos::AuthorDtos::AuthorListDto
   returns   :find_books_by_author_id, dto: ::Dtos::BookDtos::BookThinListDto
   validates :add_author, author_dto: ::Dtos::AuthorDtos::AddAuthorDto, returns: ::Dtos::AuthorDtos::AuthorDto
-  validates :add_book, book_dto: ::Dtos::BookDtos::AddBookDto, returns: ::Dtos::BookDtos::BookDto
   validates :update_author, author_dto: ::Dtos::AuthorDtos::UpdateAuthorDto, returns: ::Dtos::AuthorDtos::AuthorDto
 
   def add_author(author_dto:)
-    author = Author.new
-    author.first_name = author_dto.first_name
-    author.last_name = author_dto.last_name
-    author.save
+    author = Author.create(first_name: author_dto.first_name, last_name: author_dto.last_name)
+    raise AuthorNotSaved unless author.save
+
     author.attributes
   end
 
-  def add_book(author_id:, book_dto:)
+  def add_book(author_id:, book_name:)
     author = Author.find_by(id: author_id)
     raise AuthorNotFound, author_id if author.nil?
 
-    book = Book.new
-    book.name = book_dto.name
+    book = Book.create(name: book_name)
     book.authors << author
-    book.save
+    raise BookNotSaved, name unless book.save
+
     book.attributes
   end
 
   def destroy_author(author_id:)
     author = Author.find_by(id: author_id)
     raise AuthorNotFound, author_id if author.nil?
-
-    author.destroy
+    raise AuthorNotDeleted unless author.destroy
   end
 
   def find_all_authors
@@ -44,7 +42,7 @@ class AuthorService < ApplicationService
 
   def find_author_by_id(author_id:)
     author = Author.find_by(id: author_id)
-    raise AuthorNotFound if author.nil?
+    raise AuthorNotFound, author_id if author.nil?
 
     author.attributes
   end
@@ -70,7 +68,8 @@ class AuthorService < ApplicationService
 
     author.first_name = author_dto.first_name
     author.last_name = author_dto.last_name
-    author.save
+    raise AuthorNotSaved, author_id unless author.save
+
     author.attributes
   end
 end
