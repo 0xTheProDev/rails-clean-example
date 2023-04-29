@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module DtoConcern
-  class ValidationError < StandardError; end
+  class DtoConcernError < StandardError; end
+  class DtoValidationError < DtoConcernError; end
 
   def validates(method_name, returns: nil, **dto_map)
     to_prepend = Module.new do
@@ -13,7 +14,7 @@ module DtoConcern
             [kwarg, dto_map[kwarg][kwval]]
           rescue StandardError => e
             Rails.logger.debug(e.inspect)
-            raise ValidationError, "#{method_name} has been called with invalid argument #{kwarg}"
+            raise DtoValidationError, "#{method_name} has been called with invalid argument #{kwarg}"
           end
         end.to_h
 
@@ -24,7 +25,7 @@ module DtoConcern
           returns[return_value]
         rescue StandardError => e
           Rails.logger.debug(e.inspect)
-          raise ValidationError, "#{method_name} has returned invalid value"
+          raise DtoValidationError, "#{method_name} has returned invalid value"
         end
       end
     end
@@ -41,7 +42,7 @@ module DtoConcern
             dto[return_value]
           rescue StandardError => e
             Rails.logger.debug(e.inspect)
-            raise ValidationError, "#{method_name} has returned invalid value"
+            raise DtoValidationError, "#{method_name} has returned invalid value"
           end
         end
       end
