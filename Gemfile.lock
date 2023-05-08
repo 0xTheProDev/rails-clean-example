@@ -98,6 +98,11 @@ GEM
       dry-logic (~> 1.4)
       zeitwerk (~> 2.6)
     erubi (1.12.0)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     graphql (2.0.21)
@@ -135,6 +140,9 @@ GEM
     parallel (1.23.0)
     parser (3.2.2.1)
       ast (~> 2.4.1)
+    pluginator (1.5.0)
+    pre-commit (0.27.0)
+      pluginator (~> 1.1)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -246,7 +254,9 @@ DEPENDENCIES
   bootsnap
   debug
   dry-struct
+  factory_bot_rails
   graphql (~> 2.0)
+  pre-commit (~> 0.27.0)
   pry (~> 0.14.2)
   puma (~> 5.0)
   rack-cors

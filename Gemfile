@@ -72,3 +72,11 @@ group :development, :test do
 end
 
 gem 'graphql', '~> 2.0'
+
+group :development, :test do
+  gem 'factory_bot_rails'
+end
+
+group :development do
+  gem 'pre-commit', '~> 0.27.0', require: false
+end
