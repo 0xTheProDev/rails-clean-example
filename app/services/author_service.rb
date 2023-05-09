@@ -10,7 +10,7 @@ class AuthorService < ApplicationService
             dto: ::Dtos::AuthorDtos::AuthorListDto
   returns   :find_books_by_author_id, dto: ::Dtos::BookDtos::BookThinListDto
   validates :add_author, author_dto: ::Dtos::AuthorDtos::AddAuthorDto, returns: ::Dtos::AuthorDtos::AuthorDto
-  validates :update_author, author_dto: ::Dtos::AuthorDtos::UpdateAuthorDto, returns: ::Dtos::AuthorDtos::AuthorDto
+  # validates :update_author, author_dto: ::Dtos::AuthorDtos::UpdateAuthorDto, returns: ::Dtos::AuthorDtos::AuthorDto
 
   def add_author(author_dto:)
     author = Author.create(first_name: author_dto.first_name, last_name: author_dto.last_name)

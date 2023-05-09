@@ -3,7 +3,6 @@
 module Dtos
   module AuthorDtos
     class UpdateAuthorDto < Types::Struct
-      # attribute :id, Types::Integer.optional
       attribute :first_name, Types::String
       attribute :last_name, Types::String
     end
