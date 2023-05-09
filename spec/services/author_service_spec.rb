@@ -32,7 +32,7 @@ RSpec.describe AuthorService do
   describe '#destroy_author' do
     let(:author) { create(:author) }
 
-    it 'should delete an Author' do
+    it 'deletes an Author' do
       author_service.destroy_author(author_id: author.id)
       expect(true).to eql(true) # Dummy Expression that should always yield to True
     end
@@ -43,7 +43,7 @@ RSpec.describe AuthorService do
       create_list(:author, 3)
     end
 
-    it 'should list all authors' do
+    it 'lists all authors' do
       attrs = author_service.find_all_authors
       expect(attrs).to be_a(Array)
     end
@@ -52,7 +52,7 @@ RSpec.describe AuthorService do
   describe '#find_author_by_id' do
     let(:author) { create(:author, first_name: 'Ruskin', last_name: 'Bond') }
 
-    it 'should fetch appropriate Author' do
+    it 'fetches appropriate Author' do
       attrs = author_service.find_author_by_id(author_id: author.id)
 
       expect(attrs.id).to eql(author.id)
@@ -64,7 +64,7 @@ RSpec.describe AuthorService do
   describe '#find_authors_by_first_name' do
     let(:author) { create(:author, first_name: 'Ruskin', last_name: 'Bond') }
 
-    it 'should fetch appropriate Authors' do
+    it 'fetches appropriate Authors' do
       attrs = author_service.find_authors_by_first_name(first_name: author.first_name)
 
       expect(attrs).to be_a(Array)
@@ -76,7 +76,7 @@ RSpec.describe AuthorService do
   describe '#find_authors_by_last_name' do
     let(:author) { create(:author, first_name: 'Ruskin', last_name: 'Bond') }
 
-    it 'should fetch appropriate Authors' do
+    it 'fetches appropriate Authors' do
       attrs = author_service.find_authors_by_last_name(last_name: author.last_name)
 
       expect(attrs).to be_a(Array)
@@ -89,7 +89,7 @@ RSpec.describe AuthorService do
     let(:author) { create(:author, first_name: 'Masashi', last_name: 'Kisimoto') }
     let(:book) { create(:book, name: 'Naruto', authors: [author]) }
 
-    it 'should fetch Books written by the Author' do
+    it 'fetches Books written by the Author' do
       attrs = author_service.find_books_by_author_id(author_id: book.authors[0].id)
 
       expect(attrs).to be_a(Array)
@@ -100,7 +100,7 @@ RSpec.describe AuthorService do
   describe '#update_author' do
     let(:author) { create(:author) }
 
-    it 'should update Author' do
+    it 'updates Author' do
       author_dto = Dtos::AuthorDtos::UpdateAuthorDto.new(first_name: 'Makoto', last_name: 'Shinkai')
       attrs = author_service.update_author(author_id: author.id, author_dto:)
 

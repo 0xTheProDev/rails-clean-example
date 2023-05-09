@@ -7,6 +7,5 @@ FactoryBot.define do
 
   factory :book do
     name { 'War and Peace' }
-    authors { [create(:author)] }
   end
 end

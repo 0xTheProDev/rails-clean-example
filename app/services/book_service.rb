@@ -3,10 +3,10 @@
 require_relative '../dtos/book_dtos'
 
 class BookService < ApplicationService
-  returns   :add_author_by_id, :find_book_by_id, :remove_author_by_id, dto: ::Dtos::BookDtos::BookDto
-  returns   :find_all_books, :find_book_by_name, dto: ::Dtos::BookDtos::BookListDto
+  returns   :add_author_by_id, :find_book_by_id, :remove_author_by_id, :update_book, dto: ::Dtos::BookDtos::BookDto
+  returns   :find_all_books, :find_books_by_name, dto: ::Dtos::BookDtos::BookListDto
   validates :add_book, book_dto: ::Dtos::BookDtos::AddBookDto, returns: ::Dtos::BookDtos::BookThinDto
-  validates :update_book, book_dto: ::Dtos::BookDtos::UpdateBookDto, returns: ::Dtos::BookDtos::BookThinDto
+  # validates :update_book, book_dto: ::Dtos::BookDtos::UpdateBookDto, returns: ::Dtos::BookDtos::BookDto
 
   def add_book(book_dto:)
     book = Book.create(name: book_dto.name)
@@ -45,7 +45,7 @@ class BookService < ApplicationService
     book.with_author_attrs
   end
 
-  def find_book_by_name(name:)
+  def find_books_by_name(name:)
     Book.includes(:authors).where(name:).map(&:with_author_attrs)
   end
 
@@ -69,6 +69,6 @@ class BookService < ApplicationService
     book.name = book_dto.name
     raise BookNotSaved, book_id unless book.save
 
-    book.attributes
+    book.with_author_attrs
   end
 end
