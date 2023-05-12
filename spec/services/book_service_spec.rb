@@ -6,7 +6,7 @@ RSpec.describe BookService do
   describe '#add_book' do
     it 'creates a new Book' do
       book_name = 'The Man and The Sea'
-      book_dto = Dtos::BookDtos::AddBookDto.new(name: book_name)
+      book_dto = BookDtos::AddBookDto.new(name: book_name)
       attrs = book_service.add_book(book_dto:)
 
       expect(attrs.id).to be_a(Integer)
@@ -95,7 +95,7 @@ RSpec.describe BookService do
 
     it 'updates Book' do
       book_id = book.id
-      book_dto = Dtos::BookDtos::UpdateBookDto.new(name: 'The Song of Ice and Fire')
+      book_dto = BookDtos::UpdateBookDto.new(name: 'The Song of Ice and Fire')
       attrs = book_service.update_book(book_id:, book_dto:)
 
       expect(attrs.id).to eql(book_id)

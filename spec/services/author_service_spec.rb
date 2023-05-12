@@ -8,7 +8,7 @@ RSpec.describe AuthorService do
       first_name = 'Ernest'
       last_name = 'Hemingway'
 
-      author_dto = Dtos::AuthorDtos::AddAuthorDto.new(first_name:, last_name:)
+      author_dto = AuthorDtos::AddAuthorDto.new(first_name:, last_name:)
       attrs = author_service.add_author(author_dto:)
 
       expect(attrs.id).to be_a(Integer)
@@ -101,7 +101,7 @@ RSpec.describe AuthorService do
     let(:author) { create(:author) }
 
     it 'updates Author' do
-      author_dto = Dtos::AuthorDtos::UpdateAuthorDto.new(first_name: 'Makoto', last_name: 'Shinkai')
+      author_dto = AuthorDtos::UpdateAuthorDto.new(first_name: 'Makoto', last_name: 'Shinkai')
       attrs = author_service.update_author(author_id: author.id, author_dto:)
 
       expect(attrs.id).to eql(author.id)

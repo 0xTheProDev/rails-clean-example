@@ -1,16 +1,13 @@
 # frozen_string_literal: true
 
-require_relative '../dtos/author_dtos'
-require_relative '../dtos/book_dtos'
-
 class AuthorService < ApplicationService
-  returns   :add_book, dto: ::Dtos::BookDtos::BookThinDto
-  returns   :find_author_by_id, :update_author, dto: ::Dtos::AuthorDtos::AuthorDto
+  returns   :add_book, dto: ::BookDtos::BookThinDto
+  returns   :find_author_by_id, :update_author, dto: ::AuthorDtos::AuthorDto
   returns   :find_all_authors, :find_authors_by_first_name, :find_authors_by_last_name,
-            dto: ::Dtos::AuthorDtos::AuthorListDto
-  returns   :find_books_by_author_id, dto: ::Dtos::BookDtos::BookThinListDto
-  validates :add_author, author_dto: ::Dtos::AuthorDtos::AddAuthorDto, returns: ::Dtos::AuthorDtos::AuthorDto
-  # validates :update_author, author_dto: ::Dtos::AuthorDtos::UpdateAuthorDto, returns: ::Dtos::AuthorDtos::AuthorDto
+            dto: ::AuthorDtos::AuthorListDto
+  returns   :find_books_by_author_id, dto: ::BookDtos::BookThinListDto
+  validates :add_author, author_dto: ::AuthorDtos::AddAuthorDto, returns: ::AuthorDtos::AuthorDto
+  # validates :update_author, author_dto: ::AuthorDtos::UpdateAuthorDto, returns: ::AuthorDtos::AuthorDto
 
   def add_author(author_dto:)
     author = Author.create(first_name: author_dto.first_name, last_name: author_dto.last_name)

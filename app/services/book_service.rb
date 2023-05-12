@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-require_relative '../dtos/book_dtos'
-
 class BookService < ApplicationService
-  returns   :add_author_by_id, :find_book_by_id, :remove_author_by_id, :update_book, dto: ::Dtos::BookDtos::BookDto
-  returns   :find_all_books, :find_books_by_name, dto: ::Dtos::BookDtos::BookListDto
-  validates :add_book, book_dto: ::Dtos::BookDtos::AddBookDto, returns: ::Dtos::BookDtos::BookThinDto
-  # validates :update_book, book_dto: ::Dtos::BookDtos::UpdateBookDto, returns: ::Dtos::BookDtos::BookDto
+  returns   :add_author_by_id, :find_book_by_id, :remove_author_by_id, :update_book, dto: ::BookDtos::BookDto
+  returns   :find_all_books, :find_books_by_name, dto: ::BookDtos::BookListDto
+  validates :add_book, book_dto: ::BookDtos::AddBookDto, returns: ::BookDtos::BookThinDto
+  # validates :update_book, book_dto: ::BookDtos::UpdateBookDto, returns: ::BookDtos::BookDto
 
   def add_book(book_dto:)
     book = Book.create(name: book_dto.name)
