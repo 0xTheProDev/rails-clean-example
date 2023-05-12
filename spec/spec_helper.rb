@@ -18,6 +18,9 @@ require 'simplecov'
 
 SimpleCov.start 'rails' do
   add_filter 'app/controllers/graphql_controller'
+  add_group 'Dtos',       'app/dtos'
+  add_group 'GraphQL',    'app/graphql'
+  add_group 'Services',   'app/services'
 end
 
 RSpec.configure do |config|

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe AuthorController do
-  describe 'POST /:id/add_book' do
+  describe 'POST /:id/books' do
     let(:author) { create(:author, first_name: 'Leo', last_name: 'Tolstoy') }
 
     it 'creates a Book for an Author' do
