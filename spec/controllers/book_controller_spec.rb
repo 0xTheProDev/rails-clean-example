@@ -11,13 +11,13 @@ RSpec.describe BookController do
 
       expect(response).to have_http_status(:ok)
       expect(resp).to eql({
-        data: [{
-          id: author.id,
-          first_name: author.first_name,
-          last_name: author.last_name
-        }],
-        errors: []
-      })
+                            data: [{
+                              id: author.id,
+                              first_name: author.first_name,
+                              last_name: author.last_name
+                            }],
+                            errors: []
+                          })
     end
   end
 
@@ -31,13 +31,15 @@ RSpec.describe BookController do
 
       expect(response).to have_http_status(:ok)
       expect(resp).to eql({
-        data: authors.map { |author| {
-          id: author.id,
-          first_name: author.first_name,
-          last_name: author.last_name
-        }},
-        errors: []
-      })
+                            data: authors.map do |author|
+                                    {
+                                      id: author.id,
+                                      first_name: author.first_name,
+                                      last_name: author.last_name
+                                    }
+                                  end,
+                            errors: []
+                          })
     end
   end
 
@@ -45,17 +47,17 @@ RSpec.describe BookController do
     it 'creates a Book' do
       name = 'The Art of War'
 
-      post :create, params: { name:, }
+      post :create, params: { name: }
       resp = JSON.parse(response.body).deep_symbolize_keys!
 
       expect(response).to have_http_status(:created)
       expect(resp).to match({
-        data: {
-          id: be_a_kind_of(Integer),
-          name:
-        },
-        errors: []
-      })
+                              data: {
+                                id: be_a_kind_of(Integer),
+                                name:
+                              },
+                              errors: []
+                            })
     end
   end
 
@@ -68,9 +70,9 @@ RSpec.describe BookController do
 
       expect(response).to have_http_status(:no_content)
       expect(resp).to eql({
-        data: nil,
-        errors: []
-      })
+                            data: nil,
+                            errors: []
+                          })
     end
   end
 
@@ -84,17 +86,17 @@ RSpec.describe BookController do
 
       expect(response).to have_http_status(:ok)
       expect(resp).to eql({
-        data: {
-          id: book.id,
-          name: book.name,
-          authors: [{
-            id: author.id,
-            first_name: author.first_name,
-            last_name: author.last_name
-          }]
-        },
-        errors: []
-      })
+                            data: {
+                              id: book.id,
+                              name: book.name,
+                              authors: [{
+                                id: author.id,
+                                first_name: author.first_name,
+                                last_name: author.last_name
+                              }]
+                            },
+                            errors: []
+                          })
     end
   end
 
@@ -107,13 +109,15 @@ RSpec.describe BookController do
 
       expect(response).to have_http_status(:ok)
       expect(resp).to eql({
-        data: books.map { |book| {
-          id: book.id,
-          name: book.name,
-          authors: []
-        }},
-        errors: []
-      })
+                            data: books.map do |book|
+                                    {
+                                      id: book.id,
+                                      name: book.name,
+                                      authors: []
+                                    }
+                                  end,
+                            errors: []
+                          })
     end
   end
 
@@ -127,13 +131,13 @@ RSpec.describe BookController do
 
       expect(response).to have_http_status(:ok)
       expect(resp).to eql({
-        data: [{
-          id: authors[1].id,
-          first_name: authors[1].first_name,
-          last_name: authors[1].last_name
-        }],
-        errors: []
-      })
+                            data: [{
+                              id: authors[1].id,
+                              first_name: authors[1].first_name,
+                              last_name: authors[1].last_name
+                            }],
+                            errors: []
+                          })
     end
   end
 
@@ -148,12 +152,12 @@ RSpec.describe BookController do
 
       expect(response).to have_http_status(:ok)
       expect(resp).to eql({
-        data: {
-          id: book.id,
-          name: name,
-        },
-        errors: []
-      })
+                            data: {
+                              id: book.id,
+                              name:
+                            },
+                            errors: []
+                          })
     end
   end
 end

@@ -6,6 +6,6 @@ class Book < ApplicationRecord
   validates :name, presence: true
 
   def with_author_attrs
-    self.attributes.merge({ authors: self.authors.map(&:attributes) })
+    attributes.merge({ authors: authors.map(&:attributes) })
   end
 end

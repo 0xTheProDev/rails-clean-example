@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.describe Book do
-  it "has a valid factory" do
+  it 'has a valid factory' do
     FactoryBot.build(:book).should be_valid
   end
 
-  it "is invalid without a name" do
+  it 'is invalid without a name' do
     FactoryBot.build(:book, name: nil).should_not be_valid
   end
 

@@ -26,10 +26,22 @@ GraphQL/MaxDepthSchema:
   Exclude:
     - 'app/graphql/rails_clean_example_schema.rb'
 
-# Offense count: 5
+# Offense count: 17
 GraphQL/ObjectDescription:
   Exclude:
+    - 'app/graphql/rails_clean_example_schema.rb'
+    - 'app/graphql/mutations/base_mutation.rb'
     - 'app/graphql/types/author_type.rb'
+    - 'app/graphql/types/base_argument.rb'
+    - 'app/graphql/types/base_connection.rb'
+    - 'app/graphql/types/base_edge.rb'
+    - 'app/graphql/types/base_enum.rb'
+    - 'app/graphql/types/base_field.rb'
+    - 'app/graphql/types/base_input_object.rb'
+    - 'app/graphql/types/base_interface.rb'
+    - 'app/graphql/types/base_object.rb'
+    - 'app/graphql/types/base_scalar.rb'
+    - 'app/graphql/types/base_union.rb'
     - 'app/graphql/types/book_type.rb'
     - 'app/graphql/types/mutation_type.rb'
     - 'app/graphql/types/node_type.rb'

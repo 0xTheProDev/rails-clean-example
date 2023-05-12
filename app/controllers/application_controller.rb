@@ -30,7 +30,8 @@ class ApplicationController < ActionController::Base
   end
 
   def failed_to_publish_book(author_id, book_id)
-    json_render(errors: ["Failed to Publish Book (Id: #{book_id}) for Author (Id: #{author_id})."], status: :internal_server_error)
+    json_render(errors: ["Failed to Publish Book (Id: #{book_id}) for Author (Id: #{author_id})."],
+                status: :internal_server_error)
   end
 
   def failed_to_save_author(author_id)
@@ -44,7 +45,8 @@ class ApplicationController < ActionController::Base
   end
 
   def failed_to_unpublish_book(author_id, book_id)
-    json_render(errors: ["Failed to Unpublish Book (Id: #{book_id}) for Author (Id: #{author_id})."], status: :internal_server_error)
+    json_render(errors: ["Failed to Unpublish Book (Id: #{book_id}) for Author (Id: #{author_id})."],
+                status: :internal_server_error)
   end
 
   def invalid_author_id_error(author_id)

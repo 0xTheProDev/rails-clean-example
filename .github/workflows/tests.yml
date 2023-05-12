@@ -51,7 +51,6 @@ jobs:
           path: swagger
 
   lint:
-    if: ${{ false }}
     runs-on: ubuntu-latest
     env:
       CI: true

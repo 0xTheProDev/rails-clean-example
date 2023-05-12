@@ -32,13 +32,13 @@ RSpec.describe BookService do
     let(:book) { create(:book) }
 
     it 'deletes a Book' do
-      book_service.destroy_book(book_id: book.id)
-      expect(true).to eql(true) # Dummy Expression that should always yield to True
+      attrs = book_service.destroy_book(book_id: book.id)
+      expect(attrs).to be(nil)
     end
   end
 
   describe '#find_all_books' do
-    before :each do
+    before do
       create_list(:book, 3)
     end
 
@@ -75,7 +75,7 @@ RSpec.describe BookService do
     let(:author) { create(:author) }
     let(:book) { create(:book, name: 'The Song of Ice and Fire') }
 
-    before :each do
+    before do
       book.authors << author
       book.save
     end

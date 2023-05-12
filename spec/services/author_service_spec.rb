@@ -33,13 +33,13 @@ RSpec.describe AuthorService do
     let(:author) { create(:author) }
 
     it 'deletes an Author' do
-      author_service.destroy_author(author_id: author.id)
-      expect(true).to eql(true) # Dummy Expression that should always yield to True
+      attrs = author_service.destroy_author(author_id: author.id)
+      expect(attrs).to be(nil)
     end
   end
 
   describe '#find_all_authors' do
-    before :each do
+    before do
       create_list(:author, 3)
     end
 

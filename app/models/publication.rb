@@ -5,10 +5,8 @@ class Publication < ApplicationRecord
   belongs_to :book, class_name: 'Book'
 
   def save(*args, **kwargs, &block)
-    begin
-      super(*args, **kwargs, &block)
-    rescue ActiveRecord::RecordNotUnique
-      true
-    end
+    super(*args, **kwargs, &block)
+  rescue ActiveRecord::RecordNotUnique
+    true
   end
 end
