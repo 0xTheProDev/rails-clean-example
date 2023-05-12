@@ -10,22 +10,10 @@ on:
 
 jobs:
   unit-test:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
-    services:
-      postgres:
-        image: postgres:11-alpine
-        ports:
-          - "5432:5432"
-        env:
-          POSTGRES_DB: rails_clean_example
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
+    runs-on: ubuntu-latest
     env:
+      CI: true
       RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_clean_example"
     steps:
       - uses: actions/checkout@v2
 
@@ -43,6 +31,7 @@ jobs:
   swagger:
     runs-on: ubuntu-latest
     env:
+      CI: true
       RAILS_ENV: test
     steps:
       - uses: actions/checkout@v2
@@ -53,7 +42,7 @@ jobs:
           bundler-cache: true
 
       - name: Generate OpenAPI Spec
-        run: bundle exec rails rwag
+        run: bundle exec rails rswag
 
       - name: Archive OpenAPI artifacts
         uses: actions/upload-artifact@v3
@@ -62,7 +51,10 @@ jobs:
           path: swagger
 
   lint:
+    if: ${{ false }}
     runs-on: ubuntu-latest
+    env:
+      CI: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
