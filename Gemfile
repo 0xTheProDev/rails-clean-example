@@ -76,6 +76,7 @@ gem 'graphql', '~> 2.0'
 
 group :development, :test do
   gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do

@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  rescue_from ::ApplicationService::AuthorNotDeleted,     with: :failed_to_delete_author
-  rescue_from ::ApplicationService::AuthorNotFound,       with: :invalid_author_id_error
-  rescue_from ::ApplicationService::AuthorNotSaved,       with: :failed_to_save_author
+  rescue_from ApplicationService::AuthorNotDeleted,     with: :failed_to_delete_author
+  rescue_from ApplicationService::AuthorNotFound,       with: :invalid_author_id_error
+  rescue_from ApplicationService::AuthorNotSaved,       with: :failed_to_save_author
 
-  rescue_from ::ApplicationService::BookNotDeleted,       with: :failed_to_delete_book
-  rescue_from ::ApplicationService::BookNotFound,         with: :invalid_book_id_error
-  rescue_from ::ApplicationService::BookNotPublished,     with: :failed_to_publish_book
-  rescue_from ::ApplicationService::BookNotSaved,         with: :failed_to_save_book
-  rescue_from ::ApplicationService::BookNotUnpublished,   with: :failed_to_unpublish_book
+  rescue_from ApplicationService::BookNotDeleted,       with: :failed_to_delete_book
+  rescue_from ApplicationService::BookNotFound,         with: :invalid_book_id_error
+  rescue_from ApplicationService::BookNotPublished,     with: :failed_to_publish_book
+  rescue_from ApplicationService::BookNotSaved,         with: :failed_to_save_book
+  rescue_from ApplicationService::BookNotUnpublished,   with: :failed_to_unpublish_book
 
   def json_render(data: nil, errors: [], status: :ok)
     render json: { data:, errors: }, status:

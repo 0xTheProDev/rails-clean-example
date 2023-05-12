@@ -1,11 +1,12 @@
 FactoryBot.define do
 
   factory :author do
-    first_name { 'Leo' }
-    last_name { 'Tolstoy' }
+    first_name { Faker::Name.unique.first_name }
+    last_name { Faker::Name.unique.last_name }
   end
 
   factory :book do
-    name { 'War and Peace' }
+    name { Faker::Book.unique.title }
+    authors { [] }
   end
 end

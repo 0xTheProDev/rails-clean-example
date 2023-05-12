@@ -2,7 +2,9 @@
 
 require 'simplecov'
 
-SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  add_filter 'app/controllers/graphql_controller'
+end
 
 ENV['RAILS_ENV'] ||= 'test'
 
