@@ -82,3 +82,8 @@ end
 group :development do
   gem 'pre-commit', '~> 0.27.0', require: false
 end
+
+group :development do
+  gem 'brakeman', require: false
+  gem 'bundler-audit', require: false
+end

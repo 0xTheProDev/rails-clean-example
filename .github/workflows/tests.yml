@@ -1,0 +1,81 @@
+---
+name: Tests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  unit-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_clean_example
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_clean_example"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+        with:
+          bundler-cache: true
+
+      - name: Set up database schema
+        run: bundle exec rails db:schema:load
+
+      - name: Run Unit Tests
+        run: bundle exec rspec spec/controllers spec/models spec/services
+
+  swagger:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+        with:
+          bundler-cache: true
+
+      - name: Generate OpenAPI Spec
+        run: bundle exec rails rwag
+
+      - name: Archive OpenAPI artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: openapi-yaml
+          path: swagger
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+        with:
+          bundler-cache: true
+
+      - name: Security audit dependencies
+        run: bundle exec bundler-audit --update
+
+      - name: Security audit application code
+        run: bundle exec brakeman -q -w2
+
+      - name: Lint Ruby files
+        run: bundle exec rubocop --parallel
